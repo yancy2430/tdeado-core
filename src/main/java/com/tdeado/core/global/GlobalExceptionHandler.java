@@ -16,6 +16,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,8 +59,20 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public R<Object> messageNotReadable(MissingServletRequestParameterException exception){
 
-        return R.failed(exception.getParameterName()+"参数类型不匹配");
+        return R.failed(" "+exception.getParameterName()+" 为必传字段");
     }
+    /***
+     * 参数绑定异常
+     * @date 2018/10/16
+     * @param exception HttpMessageNotReadableException
+     */
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ResponseBody
+    public R<Object> messageNotReadable(MethodArgumentTypeMismatchException exception){
+
+        return R.failed(" "+exception.getParameter().getParameterName()+" 参数类型不匹配，需要的类型为 "+exception.getParameter().getParameterType().getSimpleName());
+    }
+
 
     /**
      * <p>
