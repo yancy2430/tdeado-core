@@ -48,6 +48,7 @@ public class GlobalExceptionHandler {
         for (JsonMappingException.Reference reference :e){
             fieldName = reference.getFieldName();
         }
+        exception.printStackTrace();
         return R.failed(fieldName+"参数类型不匹配");
     }
     /***
