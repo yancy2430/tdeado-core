@@ -1,5 +1,6 @@
 package com.tdeado.core.jsonconversion;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.BeanProperty;
@@ -10,6 +11,8 @@ import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import com.tdeado.core.annotations.FieldBind;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FieldBindSerializer extends JsonSerializer<Object> implements ContextualSerializer {
     private FieldBind field;
@@ -29,8 +32,18 @@ public class FieldBindSerializer extends JsonSerializer<Object> implements Conte
     public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         gen.writeObject(value);
         if (null!=field){
-            Object val = cacheService.getValue(field,value);
-            gen.writeObjectField(field.alias(),val);
+            if (value instanceof List){
+                List<Object> objects = new ArrayList<>();
+                for (Object object : (List)value) {
+                    objects.add(cacheService.getValue(field,object));
+                }
+                gen.writeObjectField(field.alias(),objects);
+            }else {
+                Object val = cacheService.getValue(field,value);
+                if (StrUtil.isNotBlank(field.alias())){
+                    gen.writeObjectField(field.alias(),val);
+                }
+            }
         }
 
     }

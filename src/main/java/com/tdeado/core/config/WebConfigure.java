@@ -1,7 +1,9 @@
 package com.tdeado.core.config;
 
 import com.tdeado.core.interceptor.BaseHandlerInterceptor;
+import com.tdeado.core.request.factory.RequestFieldToEnumConvertFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
@@ -42,4 +44,8 @@ public class WebConfigure implements WebMvcConfigurer {
         converters.add(converter);
     }
 
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverterFactory(new RequestFieldToEnumConvertFactory());
+    }
 }
