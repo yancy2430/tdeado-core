@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.tdeado.core.config.WebConfigure,\
   com.tdeado.core.config.BaseConfigure,\
-  com.tdeado.core.global.GlobalExceptionHandler
+  com.tdeado.core.global.GlobalExceptionHandler,\
+  com.tdeado.core.global.EnumsController
