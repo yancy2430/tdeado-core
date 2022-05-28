@@ -14,6 +14,10 @@ public enum ApiErrorCode implements IErrorCode {
      */
     FAILED(-1, "操作失败"),
     /**
+     * 无操作权限
+     */
+    NO_OPERATE_ACCESS(402, "无操作权限"),
+    /**
      * 无访问权限
      */
     NO_ACCESS(403, "无访问权限"),
