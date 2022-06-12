@@ -87,7 +87,7 @@
         <repository>
             <id>releases</id>
             <name>local releases</name>
-            <url>https://nexus.tdeado.com/repository/maven-releases/</url>
+            <url>https://nexus.xiangshangsl.com/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
     <repositories>
@@ -112,7 +112,7 @@
             </snapshots>
             <id>releases</id>
             <name>tdeado</name>
-            <url>https://nexus.tdeado.com/repository/maven-public/</url>
+            <url>https://nexus.xiangshangsl.com/repository/maven-public/</url>
         </repository>
     </repositories>
     <build>
