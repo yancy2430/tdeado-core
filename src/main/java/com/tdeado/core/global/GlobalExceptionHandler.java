@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +51,7 @@ public class GlobalExceptionHandler {
             fieldName = reference.getFieldName();
         }
         exception.printStackTrace();
-        return R.failed(fieldName+"参数类型不匹配");
+        return R.failed(fieldName+"：参数类型不匹配");
     }
     /***
      * 参数绑定异常
@@ -60,7 +62,21 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public R<Object> messageNotReadable(MissingServletRequestParameterException exception){
 
-        return R.failed(" "+exception.getParameterName()+" 为必传字段");
+        return R.failed(exception.getParameterName()+"：为必传字段");
+    }
+    /***
+     * 参数绑定异常
+     * @date 2018/10/16
+     * @param exception HttpMessageNotReadableException
+     */
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseBody
+    public R<Object> messageNotReadable(ConstraintViolationException exception){
+        for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
+            String[] res = constraintViolation.getPropertyPath().toString().split("\\.");
+            return R.failed(constraintViolation.getPropertyPath().toString().replace(res[0]+".","")+"："+constraintViolation.getMessage());
+        }
+        return R.failed("参数绑定异常");
     }
     /***
      * 参数绑定异常
@@ -71,7 +87,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public R<Object> messageNotReadable(MethodArgumentTypeMismatchException exception){
 
-        return R.failed(" "+exception.getParameter().getParameterName()+" 参数类型不匹配，需要的类型为 "+exception.getParameter().getParameterType().getSimpleName());
+        return R.failed(exception.getParameter().getParameterName()+"：参数类型不匹配，需要的类型为："+exception.getParameter().getParameterType().getSimpleName());
     }
 
 
