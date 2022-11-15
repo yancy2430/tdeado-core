@@ -96,6 +96,7 @@
             <url>https://nexus.yangzhe.wiki/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
+
     <repositories>
         <repository>
             <id>nexus-aliyun</id>
