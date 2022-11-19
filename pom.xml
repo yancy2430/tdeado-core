@@ -7,7 +7,7 @@
     <name>tdeado-core</name>
     <groupId>com.tdeado</groupId>
     <artifactId>tdeado-core</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.7.22</version>
+            <version>5.8.9</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -46,7 +46,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.13.4.1</version>
+            <version>2.14.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -80,13 +80,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.6.7</version>
+            <version>2.7.5</version>
         </dependency>
         <!--jsr 303-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
-            <version>2.6.7</version>
+            <version>2.7.5</version>
         </dependency>
     </dependencies>
     <distributionManagement>
@@ -96,32 +96,6 @@
             <url>https://nexus.yangzhe.wiki/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
-
-    <repositories>
-        <repository>
-            <id>nexus-aliyun</id>
-            <name>Nexus aliyun</name>
-            <layout>default</layout>
-            <url>https://maven.aliyun.com/nexus/content/groups/public</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>releases</id>
-            <name>tdeado</name>
-            <url>https://nexus.yangzhe.wiki/repository/maven-public/</url>
-        </repository>
-    </repositories>
     <build>
         <plugins>
             <plugin>
